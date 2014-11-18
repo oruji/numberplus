@@ -23,7 +23,15 @@ public final class NumberPlus {
 	}
 
 	public NumberPlus(Double value) {
-		this.value = value.toString().toCharArray();
+		this.value = String.valueOf(value).toCharArray();
+	}
+
+	public NumberPlus(Long value) {
+		this.value = String.valueOf(value).toCharArray();
+	}
+
+	public NumberPlus(Integer value) {
+		this.value = String.valueOf(value).toCharArray();
 	}
 
 	public NumberPlus(char[] value) {
@@ -42,7 +50,6 @@ public final class NumberPlus {
 		}
 
 		return new String(charArr);
-
 	}
 
 	public String toEnglishSep() {
@@ -166,5 +173,17 @@ public final class NumberPlus {
 				.parseDouble(new String(this.value)));
 
 		return toPersian(str.toCharArray());
+	}
+
+	public Double toDouble() {
+		return Double.valueOf(toEnglish(this.value));
+	}
+
+	public Long toLong() {
+		return Double.valueOf(toEnglish(this.value)).longValue();
+	}
+
+	public Integer toInteger() {
+		return Double.valueOf(toEnglish(this.value)).intValue();
 	}
 }

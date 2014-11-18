@@ -43,8 +43,10 @@ public final class NumberPlus {
 	}
 
 	public String toPersian() {
-		char[] charArr = this.value;
+		return toPersian(this.value);
+	}
 
+	private String toPersian(char[] charArr) {
 		for (int i = 0; i < charArr.length; i++) {
 			if (charArr[i] >= 48 && charArr[i] <= 57) {
 				charArr[i] = (char) (charArr[i] + convertNumber);
@@ -54,7 +56,7 @@ public final class NumberPlus {
 		return new String(charArr);
 	}
 
-	public String separate(sepStatus decimalSep, sepStatus groupSep) {
+	public String toEnglishSep(sepStatus decimalSep, sepStatus groupSep) {
 		DecimalFormatSymbols otherSymbols = new DecimalFormatSymbols(Locale.US);
 
 		switch (decimalSep) {
@@ -90,5 +92,46 @@ public final class NumberPlus {
 		DecimalFormat formatter = new DecimalFormat("", otherSymbols);
 
 		return formatter.format(Double.parseDouble(new String(this.value)));
+	}
+
+	public String toPersianSep(sepStatus decimalSep, sepStatus groupSep) {
+		DecimalFormatSymbols otherSymbols = new DecimalFormatSymbols(Locale.US);
+
+		switch (decimalSep) {
+		case COMMA:
+			otherSymbols.setDecimalSeparator(',');
+			break;
+		case DOT:
+			otherSymbols.setDecimalSeparator('.');
+			break;
+		case SLASH:
+			otherSymbols.setDecimalSeparator('/');
+			break;
+
+		default:
+			break;
+		}
+
+		switch (groupSep) {
+		case COMMA:
+			otherSymbols.setGroupingSeparator(',');
+			break;
+		case DOT:
+			otherSymbols.setGroupingSeparator('.');
+			break;
+		case SLASH:
+			otherSymbols.setGroupingSeparator('/');
+			break;
+
+		default:
+			break;
+		}
+
+		DecimalFormat formatter = new DecimalFormat("", otherSymbols);
+
+		String str = formatter.format(Double
+				.parseDouble(new String(this.value)));
+
+		return toPersian(str.toCharArray());
 	}
 }

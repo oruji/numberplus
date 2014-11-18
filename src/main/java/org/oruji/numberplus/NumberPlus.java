@@ -46,7 +46,7 @@ public final class NumberPlus {
 	}
 
 	public String getEnglish() {
-		return getEnglish(this.value);
+		return getEnglish(value);
 	}
 
 	private String getEnglish(char[] charArr) {
@@ -66,7 +66,7 @@ public final class NumberPlus {
 		DecimalFormat formatter = new DecimalFormat("", separateSymbol);
 
 		String str = formatter.format(Double
-				.parseDouble(getEnglish(this.value)));
+				.parseDouble(getEnglish(value)));
 
 		if (language == langStat.PERSIAN)
 			return getPersian(str.toCharArray());
@@ -109,7 +109,7 @@ public final class NumberPlus {
 		DecimalFormat formatter = new DecimalFormat("", separateSymbol);
 
 		String str = formatter.format(Double
-				.parseDouble(getEnglish(this.value)));
+				.parseDouble(getEnglish(value)));
 
 		if (language == langStat.PERSIAN)
 			return getPersian(str.toCharArray());
@@ -126,7 +126,7 @@ public final class NumberPlus {
 	}
 
 	public String getPersian() {
-		return getPersian(this.value);
+		return getPersian(value);
 	}
 
 	private String getPersian(char[] charArr) {
@@ -148,18 +148,18 @@ public final class NumberPlus {
 	}
 
 	public Integer getInteger() {
-		return Double.valueOf(getEnglish(this.value)).intValue();
+		return Double.valueOf(getEnglish(value)).intValue();
 	}
 
 	public Long getLong() {
-		return Double.valueOf(getEnglish(this.value)).longValue();
+		return Double.valueOf(getEnglish(value)).longValue();
 	}
 
 	public Double getDouble() {
-		return Double.valueOf(getEnglish(this.value));
+		return Double.valueOf(getEnglish(value));
 	}
 
 	public Float getFloat() {
-		return Float.valueOf(getEnglish(this.value));
+		return Float.valueOf(getEnglish(value));
 	}
 }

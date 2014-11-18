@@ -9,7 +9,7 @@ public final class NumberPlus {
 	private final DecimalFormatSymbols separateSymbol = new DecimalFormatSymbols(
 			Locale.US);
 
-	private char[] value;
+	private final char[] value;
 
 	private enum langStat {
 		PERSIAN, ENGLISH
@@ -21,6 +21,7 @@ public final class NumberPlus {
 
 	@SuppressWarnings("unused")
 	private NumberPlus() {
+		this.value = new char[0];
 	}
 
 	public NumberPlus(String value) {
@@ -65,8 +66,7 @@ public final class NumberPlus {
 
 		DecimalFormat formatter = new DecimalFormat("", separateSymbol);
 
-		String str = formatter.format(Double
-				.parseDouble(getEnglish(value)));
+		String str = formatter.format(Double.parseDouble(getEnglish(value)));
 
 		if (language == langStat.PERSIAN)
 			return getPersian(str.toCharArray());
@@ -108,8 +108,7 @@ public final class NumberPlus {
 
 		DecimalFormat formatter = new DecimalFormat("", separateSymbol);
 
-		String str = formatter.format(Double
-				.parseDouble(getEnglish(value)));
+		String str = formatter.format(Double.parseDouble(getEnglish(value)));
 
 		if (language == langStat.PERSIAN)
 			return getPersian(str.toCharArray());

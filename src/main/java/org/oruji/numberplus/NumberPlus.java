@@ -18,7 +18,6 @@ public final class NumberPlus {
 	}
 
 	public NumberPlus(String value) {
-		value = value.replaceAll("[^\\x00-\\x7f]", "");
 		value = value.trim();
 		value = value.replaceAll(",", "");
 		this.value = value.toCharArray();

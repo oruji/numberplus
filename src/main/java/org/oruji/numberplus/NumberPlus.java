@@ -17,12 +17,16 @@ public final class NumberPlus {
 	private NumberPlus() {
 	}
 
+	public NumberPlus(char[] value) {
+		this.value = value;
+	}
+
 	public NumberPlus(String value) {
 		value = value.replaceAll(",", "");
 		this.value = value.toCharArray();
 	}
 
-	public NumberPlus(Double value) {
+	public NumberPlus(Integer value) {
 		this.value = String.valueOf(value).toCharArray();
 	}
 
@@ -30,19 +34,19 @@ public final class NumberPlus {
 		this.value = String.valueOf(value).toCharArray();
 	}
 
-	public NumberPlus(Integer value) {
+	public NumberPlus(Float value) {
 		this.value = String.valueOf(value).toCharArray();
 	}
 
-	public NumberPlus(char[] value) {
-		this.value = value;
+	public NumberPlus(Double value) {
+		this.value = String.valueOf(value).toCharArray();
 	}
 
-	public String toEnglish() {
-		return toEnglish(this.value);
+	public String getEnglish() {
+		return getEnglish(this.value);
 	}
 
-	private String toEnglish(char[] charArr) {
+	private String getEnglish(char[] charArr) {
 		for (int i = 0; i < charArr.length; i++) {
 			if (charArr[i] >= 1776 && charArr[i] <= 1785) {
 				charArr[i] = (char) (charArr[i] - convertNumber);
@@ -52,8 +56,8 @@ public final class NumberPlus {
 		return new String(charArr);
 	}
 
-	public String toEnglishSep() {
-		String value = toEnglish(this.value);
+	public String getEnglishSep() {
+		String value = getEnglish(this.value);
 		DecimalFormatSymbols otherSymbols = new DecimalFormatSymbols(Locale.US);
 		otherSymbols.setDecimalSeparator('.');
 		otherSymbols.setGroupingSeparator(',');
@@ -65,8 +69,8 @@ public final class NumberPlus {
 		return str;
 	}
 
-	public String toEnglishSep(sepStatus decimalSep, sepStatus groupSep) {
-		String value = toEnglish(this.value);
+	public String getEnglishSep(sepStatus decimalSep, sepStatus groupSep) {
+		String value = getEnglish(this.value);
 
 		DecimalFormatSymbols otherSymbols = new DecimalFormatSymbols(Locale.US);
 
@@ -103,14 +107,14 @@ public final class NumberPlus {
 		DecimalFormat formatter = new DecimalFormat("", otherSymbols);
 		String str = formatter.format(Double.parseDouble(value));
 
-		return toEnglish(str.toCharArray());
+		return getEnglish(str.toCharArray());
 	}
 
-	public String toPersian() {
-		return toPersian(this.value);
+	public String getPersian() {
+		return getPersian(this.value);
 	}
 
-	private String toPersian(char[] charArr) {
+	private String getPersian(char[] charArr) {
 		for (int i = 0; i < charArr.length; i++) {
 			if (charArr[i] >= 48 && charArr[i] <= 57) {
 				charArr[i] = (char) (charArr[i] + convertNumber);
@@ -120,7 +124,7 @@ public final class NumberPlus {
 		return new String(charArr);
 	}
 
-	public String toPersianSep() {
+	public String getPersianSep() {
 		DecimalFormatSymbols otherSymbols = new DecimalFormatSymbols(Locale.US);
 
 		otherSymbols.setDecimalSeparator('.');
@@ -131,10 +135,10 @@ public final class NumberPlus {
 		String str = formatter.format(Double
 				.parseDouble(new String(this.value)));
 
-		return toPersian(str.toCharArray());
+		return getPersian(str.toCharArray());
 	}
 
-	public String toPersianSep(sepStatus decimalSep, sepStatus groupSep) {
+	public String getPersianSep(sepStatus decimalSep, sepStatus groupSep) {
 		DecimalFormatSymbols otherSymbols = new DecimalFormatSymbols(Locale.US);
 
 		switch (decimalSep) {
@@ -172,18 +176,22 @@ public final class NumberPlus {
 		String str = formatter.format(Double
 				.parseDouble(new String(this.value)));
 
-		return toPersian(str.toCharArray());
+		return getPersian(str.toCharArray());
 	}
 
-	public Double toDouble() {
-		return Double.valueOf(toEnglish(this.value));
+	public Integer getInteger() {
+		return Double.valueOf(getEnglish(this.value)).intValue();
 	}
 
-	public Long toLong() {
-		return Double.valueOf(toEnglish(this.value)).longValue();
+	public Long getLong() {
+		return Double.valueOf(getEnglish(this.value)).longValue();
 	}
 
-	public Integer toInteger() {
-		return Double.valueOf(toEnglish(this.value)).intValue();
+	public Double getDouble() {
+		return Double.valueOf(getEnglish(this.value));
+	}
+
+	public Float getFloat() {
+		return Float.valueOf(getEnglish(this.value));
 	}
 }

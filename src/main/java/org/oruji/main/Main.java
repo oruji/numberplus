@@ -1,7 +1,6 @@
 package org.oruji.main;
 
 import org.oruji.numberplus.NumberPlus;
-import org.oruji.numberplus.NumberPlus.sepStatus;
 
 public class Main {
 	public static void main(String[] args) {
@@ -13,6 +12,6 @@ public class Main {
 		// System.out.println(new NumberPlus("۲۳۴۳۴۳۲۲۳.۴۲۳۴").toEnglishSep(
 		// sepStatus.SLASH, sepStatus.DOT));
 
-		System.out.println(new NumberPlus("۲۳۴۳۴۳.۴۲۳3۴").toLong());
+		System.out.println(new NumberPlus(new Long(2342)).getPersianSep());
 	}
 }

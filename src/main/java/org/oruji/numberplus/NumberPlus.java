@@ -31,8 +31,10 @@ public final class NumberPlus {
 	}
 
 	public String toEnglish() {
-		char[] charArr = this.value;
+		return toEnglish(this.value);
+	}
 
+	private String toEnglish(char[] charArr) {
 		for (int i = 0; i < charArr.length; i++) {
 			if (charArr[i] >= 1776 && charArr[i] <= 1785) {
 				charArr[i] = (char) (charArr[i] - convertNumber);
@@ -40,23 +42,25 @@ public final class NumberPlus {
 		}
 
 		return new String(charArr);
+
 	}
 
-	public String toPersian() {
-		return toPersian(this.value);
-	}
+	public String toEnglishSep() {
+		String value = toEnglish(this.value);
+		DecimalFormatSymbols otherSymbols = new DecimalFormatSymbols(Locale.US);
+		otherSymbols.setDecimalSeparator('.');
+		otherSymbols.setGroupingSeparator(',');
 
-	private String toPersian(char[] charArr) {
-		for (int i = 0; i < charArr.length; i++) {
-			if (charArr[i] >= 48 && charArr[i] <= 57) {
-				charArr[i] = (char) (charArr[i] + convertNumber);
-			}
-		}
+		DecimalFormat formatter = new DecimalFormat("", otherSymbols);
 
-		return new String(charArr);
+		String str = formatter.format(Double.parseDouble(value));
+
+		return str;
 	}
 
 	public String toEnglishSep(sepStatus decimalSep, sepStatus groupSep) {
+		String value = toEnglish(this.value);
+
 		DecimalFormatSymbols otherSymbols = new DecimalFormatSymbols(Locale.US);
 
 		switch (decimalSep) {
@@ -90,8 +94,37 @@ public final class NumberPlus {
 		}
 
 		DecimalFormat formatter = new DecimalFormat("", otherSymbols);
+		String str = formatter.format(Double.parseDouble(value));
 
-		return formatter.format(Double.parseDouble(new String(this.value)));
+		return toEnglish(str.toCharArray());
+	}
+
+	public String toPersian() {
+		return toPersian(this.value);
+	}
+
+	private String toPersian(char[] charArr) {
+		for (int i = 0; i < charArr.length; i++) {
+			if (charArr[i] >= 48 && charArr[i] <= 57) {
+				charArr[i] = (char) (charArr[i] + convertNumber);
+			}
+		}
+
+		return new String(charArr);
+	}
+
+	public String toPersianSep() {
+		DecimalFormatSymbols otherSymbols = new DecimalFormatSymbols(Locale.US);
+
+		otherSymbols.setDecimalSeparator('.');
+		otherSymbols.setGroupingSeparator(',');
+
+		DecimalFormat formatter = new DecimalFormat("", otherSymbols);
+
+		String str = formatter.format(Double
+				.parseDouble(new String(this.value)));
+
+		return toPersian(str.toCharArray());
 	}
 
 	public String toPersianSep(sepStatus decimalSep, sepStatus groupSep) {

@@ -5,9 +5,11 @@ import org.oruji.numberplus.NumberPlus.sepStatus;
 
 public class Main {
 	public static void main(String[] args) {
-		System.out.println(new NumberPlus("234,2,234").toPersianSep(
-				sepStatus.COMMA, sepStatus.SLASH));
+//		System.out.println(new NumberPlus("۲۳۴,۳,۴۳۲.۲۳۴۲").toEnglishSep(
+//				sepStatus.COMMA, sepStatus.SLASH));
+//
+//		System.out.println(new NumberPlus("۲۳۴,۳,۴۳۲.۲۳۴۲").toEnglishSep());
 
-		System.out.println(new NumberPlus("234,2,234").toPersian());
+		System.out.println(new NumberPlus("۲۳۴۳۴۳۲۲۳.۴۲۳۴").toEnglishSep(sepStatus.SLASH, sepStatus.DOT));
 	}
 }

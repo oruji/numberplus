@@ -11,6 +11,10 @@ public final class NumberPlus {
 
 	private char[] value;
 
+	private enum langStat {
+		PERSIAN, ENGLISH
+	}
+
 	public enum sepStat {
 		COMMA, DOT, SLASH
 	}
@@ -55,7 +59,7 @@ public final class NumberPlus {
 		return new String(charArr);
 	}
 
-	public String getEnglishSep() {
+	private String getSeparate(langStat language) {
 		separateSymbol.setDecimalSeparator('.');
 		separateSymbol.setGroupingSeparator(',');
 
@@ -64,10 +68,14 @@ public final class NumberPlus {
 		String str = formatter.format(Double
 				.parseDouble(getEnglish(this.value)));
 
+		if (language == langStat.PERSIAN)
+			return getPersian(str.toCharArray());
+
 		return str;
 	}
 
-	public String getEnglishSep(sepStat decimalSep, sepStat groupSep) {
+	private String getSeparate(sepStat decimalSep, sepStat groupSep,
+			langStat language) {
 		switch (decimalSep) {
 		case COMMA:
 			separateSymbol.setDecimalSeparator(',');
@@ -103,7 +111,18 @@ public final class NumberPlus {
 		String str = formatter.format(Double
 				.parseDouble(getEnglish(this.value)));
 
+		if (language == langStat.PERSIAN)
+			return getPersian(str.toCharArray());
+
 		return str;
+	}
+
+	public String getEnglishSep() {
+		return getSeparate(langStat.ENGLISH);
+	}
+
+	public String getEnglishSep(sepStat decimalSep, sepStat groupSep) {
+		return getSeparate(decimalSep, groupSep, langStat.ENGLISH);
 	}
 
 	public String getPersian() {
@@ -121,54 +140,11 @@ public final class NumberPlus {
 	}
 
 	public String getPersianSep() {
-		separateSymbol.setDecimalSeparator('.');
-		separateSymbol.setGroupingSeparator(',');
-
-		DecimalFormat formatter = new DecimalFormat("", separateSymbol);
-
-		String str = formatter.format(Double
-				.parseDouble(getEnglish(this.value)));
-
-		return getPersian(str.toCharArray());
+		return getSeparate(langStat.PERSIAN);
 	}
 
 	public String getPersianSep(sepStat decimalSep, sepStat groupSep) {
-		switch (decimalSep) {
-		case COMMA:
-			separateSymbol.setDecimalSeparator(',');
-			break;
-		case DOT:
-			separateSymbol.setDecimalSeparator('.');
-			break;
-		case SLASH:
-			separateSymbol.setDecimalSeparator('/');
-			break;
-
-		default:
-			break;
-		}
-
-		switch (groupSep) {
-		case COMMA:
-			separateSymbol.setGroupingSeparator(',');
-			break;
-		case DOT:
-			separateSymbol.setGroupingSeparator('.');
-			break;
-		case SLASH:
-			separateSymbol.setGroupingSeparator('/');
-			break;
-
-		default:
-			break;
-		}
-
-		DecimalFormat formatter = new DecimalFormat("", separateSymbol);
-
-		String str = formatter.format(Double
-				.parseDouble(getEnglish(this.value)));
-
-		return getPersian(str.toCharArray());
+		return getSeparate(decimalSep, groupSep, langStat.PERSIAN);
 	}
 
 	public Integer getInteger() {

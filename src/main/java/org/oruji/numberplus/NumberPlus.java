@@ -13,6 +13,10 @@ public final class NumberPlus {
 		COMMA, DOT, SLASH
 	}
 
+	private enum langStat {
+		PERSIAN, ENGLISH
+	}
+
 	@SuppressWarnings("unused")
 	private NumberPlus() {
 	}
@@ -67,8 +71,6 @@ public final class NumberPlus {
 	}
 
 	public String getEnglishSep(sepStat decimalSep, sepStat groupSep) {
-		String value = getEnglish(this.value);
-
 		DecimalFormatSymbols otherSymbols = new DecimalFormatSymbols(Locale.US);
 
 		switch (decimalSep) {
@@ -102,7 +104,9 @@ public final class NumberPlus {
 		}
 
 		DecimalFormat formatter = new DecimalFormat("", otherSymbols);
-		String str = formatter.format(Double.parseDouble(value));
+
+		String str = formatter.format(Double
+				.parseDouble(getEnglish(this.value)));
 
 		return getEnglish(str.toCharArray());
 	}
@@ -130,7 +134,7 @@ public final class NumberPlus {
 		DecimalFormat formatter = new DecimalFormat("", otherSymbols);
 
 		String str = formatter.format(Double
-				.parseDouble(new String(this.value)));
+				.parseDouble(getEnglish(this.value)));
 
 		return getPersian(str.toCharArray());
 	}
@@ -171,7 +175,7 @@ public final class NumberPlus {
 		DecimalFormat formatter = new DecimalFormat("", otherSymbols);
 
 		String str = formatter.format(Double
-				.parseDouble(new String(this.value)));
+				.parseDouble(getEnglish(this.value)));
 
 		return getPersian(str.toCharArray());
 	}

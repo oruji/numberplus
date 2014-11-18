@@ -9,7 +9,7 @@ public final class NumberPlus {
 
 	private char[] value;
 
-	public enum sepStatus {
+	public enum sepStat {
 		COMMA, DOT, SLASH
 	}
 
@@ -22,6 +22,8 @@ public final class NumberPlus {
 	}
 
 	public NumberPlus(String value) {
+		value = value.replaceAll("[^\\x00-\\x7f]", "");
+		value = value.trim();
 		value = value.replaceAll(",", "");
 		this.value = value.toCharArray();
 	}
@@ -69,7 +71,7 @@ public final class NumberPlus {
 		return str;
 	}
 
-	public String getEnglishSep(sepStatus decimalSep, sepStatus groupSep) {
+	public String getEnglishSep(sepStat decimalSep, sepStat groupSep) {
 		String value = getEnglish(this.value);
 
 		DecimalFormatSymbols otherSymbols = new DecimalFormatSymbols(Locale.US);
@@ -138,7 +140,7 @@ public final class NumberPlus {
 		return getPersian(str.toCharArray());
 	}
 
-	public String getPersianSep(sepStatus decimalSep, sepStatus groupSep) {
+	public String getPersianSep(sepStat decimalSep, sepStat groupSep) {
 		DecimalFormatSymbols otherSymbols = new DecimalFormatSymbols(Locale.US);
 
 		switch (decimalSep) {

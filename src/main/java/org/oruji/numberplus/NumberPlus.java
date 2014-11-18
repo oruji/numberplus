@@ -6,6 +6,8 @@ import java.util.Locale;
 
 public final class NumberPlus {
 	private static final int convertNumber = 1728;
+	private final DecimalFormatSymbols separateSymbol = new DecimalFormatSymbols(
+			Locale.US);
 
 	private char[] value;
 
@@ -54,12 +56,10 @@ public final class NumberPlus {
 	}
 
 	public String getEnglishSep() {
-		DecimalFormatSymbols otherSymbols = new DecimalFormatSymbols(Locale.US);
+		separateSymbol.setDecimalSeparator('.');
+		separateSymbol.setGroupingSeparator(',');
 
-		otherSymbols.setDecimalSeparator('.');
-		otherSymbols.setGroupingSeparator(',');
-
-		DecimalFormat formatter = new DecimalFormat("", otherSymbols);
+		DecimalFormat formatter = new DecimalFormat("", separateSymbol);
 
 		String str = formatter.format(Double
 				.parseDouble(getEnglish(this.value)));
@@ -68,17 +68,15 @@ public final class NumberPlus {
 	}
 
 	public String getEnglishSep(sepStat decimalSep, sepStat groupSep) {
-		DecimalFormatSymbols otherSymbols = new DecimalFormatSymbols(Locale.US);
-
 		switch (decimalSep) {
 		case COMMA:
-			otherSymbols.setDecimalSeparator(',');
+			separateSymbol.setDecimalSeparator(',');
 			break;
 		case DOT:
-			otherSymbols.setDecimalSeparator('.');
+			separateSymbol.setDecimalSeparator('.');
 			break;
 		case SLASH:
-			otherSymbols.setDecimalSeparator('/');
+			separateSymbol.setDecimalSeparator('/');
 			break;
 
 		default:
@@ -87,20 +85,20 @@ public final class NumberPlus {
 
 		switch (groupSep) {
 		case COMMA:
-			otherSymbols.setGroupingSeparator(',');
+			separateSymbol.setGroupingSeparator(',');
 			break;
 		case DOT:
-			otherSymbols.setGroupingSeparator('.');
+			separateSymbol.setGroupingSeparator('.');
 			break;
 		case SLASH:
-			otherSymbols.setGroupingSeparator('/');
+			separateSymbol.setGroupingSeparator('/');
 			break;
 
 		default:
 			break;
 		}
 
-		DecimalFormat formatter = new DecimalFormat("", otherSymbols);
+		DecimalFormat formatter = new DecimalFormat("", separateSymbol);
 
 		String str = formatter.format(Double
 				.parseDouble(getEnglish(this.value)));
@@ -123,12 +121,10 @@ public final class NumberPlus {
 	}
 
 	public String getPersianSep() {
-		DecimalFormatSymbols otherSymbols = new DecimalFormatSymbols(Locale.US);
+		separateSymbol.setDecimalSeparator('.');
+		separateSymbol.setGroupingSeparator(',');
 
-		otherSymbols.setDecimalSeparator('.');
-		otherSymbols.setGroupingSeparator(',');
-
-		DecimalFormat formatter = new DecimalFormat("", otherSymbols);
+		DecimalFormat formatter = new DecimalFormat("", separateSymbol);
 
 		String str = formatter.format(Double
 				.parseDouble(getEnglish(this.value)));
@@ -137,17 +133,15 @@ public final class NumberPlus {
 	}
 
 	public String getPersianSep(sepStat decimalSep, sepStat groupSep) {
-		DecimalFormatSymbols otherSymbols = new DecimalFormatSymbols(Locale.US);
-
 		switch (decimalSep) {
 		case COMMA:
-			otherSymbols.setDecimalSeparator(',');
+			separateSymbol.setDecimalSeparator(',');
 			break;
 		case DOT:
-			otherSymbols.setDecimalSeparator('.');
+			separateSymbol.setDecimalSeparator('.');
 			break;
 		case SLASH:
-			otherSymbols.setDecimalSeparator('/');
+			separateSymbol.setDecimalSeparator('/');
 			break;
 
 		default:
@@ -156,20 +150,20 @@ public final class NumberPlus {
 
 		switch (groupSep) {
 		case COMMA:
-			otherSymbols.setGroupingSeparator(',');
+			separateSymbol.setGroupingSeparator(',');
 			break;
 		case DOT:
-			otherSymbols.setGroupingSeparator('.');
+			separateSymbol.setGroupingSeparator('.');
 			break;
 		case SLASH:
-			otherSymbols.setGroupingSeparator('/');
+			separateSymbol.setGroupingSeparator('/');
 			break;
 
 		default:
 			break;
 		}
 
-		DecimalFormat formatter = new DecimalFormat("", otherSymbols);
+		DecimalFormat formatter = new DecimalFormat("", separateSymbol);
 
 		String str = formatter.format(Double
 				.parseDouble(getEnglish(this.value)));

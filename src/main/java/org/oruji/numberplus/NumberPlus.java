@@ -24,7 +24,7 @@ public final class NumberPlus {
 		this.value = new char[0];
 	}
 
-	public NumberPlus(String value) {
+	public NumberPlus(String value) throws NumberFormatException {
 		value = value.trim();
 		value = value.replaceAll(",", "");
 		this.value = value.toCharArray();
